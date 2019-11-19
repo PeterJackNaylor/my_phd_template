@@ -12,5 +12,5 @@ pdflatex dissertation
 
 # You can remove the rm if you want faster builds.
 rm .DS_Store
-rm *.{blg,bbl,toc,out,log,aux,dvi}
+rm *.{blg,bbl,toc,out,log,aux,dvi,fdb_latexmk,fls}
 rm *.{brf,bak,maf,mtc*,nlo,nls,lof,lot,idx,ilg} 

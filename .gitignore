@@ -11,6 +11,8 @@ images/
 *.toc
 *.log
 *.fdb_latexmk
+*.fls
+
 *.bbl
 fonts/*
 
