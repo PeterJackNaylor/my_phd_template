@@ -3,6 +3,8 @@
 dissertation.lof
 dissertation.synctex.gz
 dissertation.pdfsync
+.DS_Store
+*/.DS_Store
 images/
 *.aux
 *.blg
