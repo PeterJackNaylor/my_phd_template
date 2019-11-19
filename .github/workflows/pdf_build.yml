@@ -1,13 +1,12 @@
-name: CI
-
+name: Build LaTeX document
 on: [push]
-
 jobs:
-  build:
-
+  build_latex:
     runs-on: ubuntu-latest
-
     steps:
-    - uses: actions/checkout@v1
-    - name: Build pdf
-      run: ./script/build
+      - name: Set up Git repository
+        uses: actions/checkout@v1
+      - name: Compile LaTeX document
+        uses: dante-ev/latex-action@master
+        with:
+          root_file: main.tex
