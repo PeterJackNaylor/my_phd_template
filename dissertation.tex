@@ -1,0 +1,59 @@
+%!TEX encoding = UTF-8 Unicode
+
+\documentclass[a4paper,11pt,twoside]{StyleThese}
+\usepackage{psl-cover}
+
+
+\DeclareGraphicsExtensions{.pdf,.jpeg,.png}
+\graphicspath{{./figures/chapter1/}{./figures/appendix/}{./figures/cover/}}
+
+\include{newcommands}
+\include{formatAndDefs}
+
+\begin{document}
+\dominitoc
+
+
+% the front matter
+\input{frontmatter/personalize}
+\maketitle{}
+
+%\copyrightpage
+\frontmatter
+
+\input{frontmatter/abstract-fr}
+\input{frontmatter/abstract-en}
+
+\input{frontmatter/thanks}
+\cleardoublepage
+
+\tableofcontents
+\cleardoublepage
+\listoffigures \addcontentsline{toc}{chapter}{\listfigurename} \adjustmtc
+\listoftables \addcontentsline{toc}{chapter}{\listtablename} \adjustmtc
+
+
+% include each chapter...
+\mainmatter 
+
+\setcounter{chapter}{0}  % start chapter numbering at 0
+
+\include{chapters/introduction} 
+\include{chapters/chapter1}
+\include{chapters/conclusion}
+
+\begin{appendix}
+    \include{chapters/appendix/appendix_A}
+\end{appendix}
+
+\backmatter
+
+
+\clearpage
+\bibliographystyle{lemieuxdumonde.bst}
+\bibliography{references}
+
+\include{nomenclature}
+
+
+\end{document}

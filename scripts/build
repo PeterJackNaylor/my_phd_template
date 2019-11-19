@@ -1,0 +1,16 @@
+#!/bin/sh
+# Build the dissertation.
+rm .DS_Store
+rm *.{blg,bbl,toc,out,log,aux,pdf,dvi}
+rm *.{brf,bak,maf,mtc*,nlo,nls,lof,lot,idx,ilg}
+
+pdflatex dissertation
+bibtex dissertation
+makeindex dissertation.nlo -s nomencl.ist -o dissertation.nls
+pdflatex dissertation
+pdflatex dissertation
+
+# You can remove the rm if you want faster builds.
+rm .DS_Store
+rm *.{blg,bbl,toc,out,log,aux,dvi}
+rm *.{brf,bak,maf,mtc*,nlo,nls,lof,lot,idx,ilg} 

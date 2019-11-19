@@ -1,0 +1,20 @@
+% % list of symbols
+\renewcommand{\nomgroup}[1]{%
+    \item[\bfseries
+    \ifstrequal{#1}{A}{Acronyms}{%
+    \ifstrequal{#1}{B}{Mathmetical symbols}{%
+    %\ifstrequal{#1}{C}{Model and dataset names}{%
+    % \ifstrequal{#1}{D}{Learning on Graphs}{%
+    % \ifstrequal{#1}{E}{Kemeny Aggregation}{%
+    }}%
+]}
+
+\markboth{Glossary}{Symbols}%
+\printnomenclature \mtcfixnomenclature 
+
+
+\nomenclature[A]{AJI}{Aggregated Jaccard Index}
+
+\nomenclature[B, 01]{$\mathcal{A}$}{Input space}
+\nomenclature[B, 02]{$\mathcal{B}$}{Label space}
+

@@ -1,0 +1,349 @@
+% LaTeX PSL thesis cover template
+% Copyright (c) 2018, Pierre Guillou
+% All rights reserved.
+%
+% This program is free software: you can redistribute it and/or modify
+% it under the terms of the GNU General Public License as published by
+% the Free Software Foundation, either version 3 of the License, or
+% (at your option) any later version.
+%
+% This program is distributed in the hope that it will be useful,
+% but WITHOUT ANY WARRANTY; without even the implied warranty of
+% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+% See the GNU General Public License for more details.
+%
+% You should have received a copy of the GNU General Public License
+% along with this program.
+% If not, see <http://www.gnu.org/licenses/>.
+
+\NeedsTeXFormat{LaTeX2e}
+
+\ProvidesPackage{psl-cover}
+
+\RequirePackage{tabularx}
+\RequirePackage{etoolbox}
+\RequirePackage{iftex}
+\RequirePackage{tikz}
+\usetikzlibrary{backgrounds}
+
+\definecolor{pslblue}{RGB}{36, 56, 141}
+
+\newcommand*{\institute}[1]{\gdef\@institute{#1}}
+\newcommand*{\specialty}[1]{\gdef\@specialty{#1}}
+\newcommand*{\doctoralschool}[2]{
+  \gdef\@doctoralschoolname{#1}%
+  \gdef\@doctoralschoolnumber{#2}
+}
+%% default values
+\newcommand*{\@institute}{MINES ParisTech}
+\newcommand*{\@specialty}{Sp\'{e}cialit\'{e} de l'ED}
+\newcommand*{\@doctoralschoolname}{Nom de l'ED}
+\newcommand*{\@doctoralschoolnumber}{XXX}
+
+\newcommand{\jurymember}[4]{
+  \ifnum#1=1
+  \gdef\@jiname{#2}\gdef\@jitt{#3}\gdef\@jirole{#4}
+  \fi
+  \ifnum#1=2
+  \gdef\@jiiname{#2}\gdef\@jiitt{#3}\gdef\@jiirole{#4}
+  \fi
+  \ifnum#1=3
+  \gdef\@jiiiname{#2}\gdef\@jiiitt{#3}\gdef\@jiiirole{#4}
+  \fi
+  \ifnum#1=4
+  \gdef\@jivname{#2}\gdef\@jivtt{#3}\gdef\@jivrole{#4}
+  \fi
+  \ifnum#1=5
+  \gdef\@jvname{#2}\gdef\@jvtt{#3}\gdef\@jvrole{#4}
+  \fi
+  \ifnum#1=6
+  \gdef\@jviname{#2}\gdef\@jvitt{#3}\gdef\@jvirole{#4}
+  \fi
+  \ifnum#1=7
+  \gdef\@jviiname{#2}\gdef\@jviitt{#3}\gdef\@jviirole{#4}
+  \fi
+  \ifnum#1=8
+  \gdef\@jviiiname{#2}\gdef\@jviiitt{#3}\gdef\@jviiirole{#4}
+  \fi
+  \ifnum#1=9
+  \gdef\@jixname{#2}\gdef\@jixtt{#3}\gdef\@jixrole{#4}
+  \fi
+  \ifnum#1=10
+  \gdef\@jxname{#2}\gdef\@jxtt{#3}\gdef\@jxrole{#4}
+  \fi
+  \ifnum#1=11
+  \gdef\@jxiname{#2}\gdef\@jxitt{#3}\gdef\@jxirole{#4}
+  \fi
+  \ifnum#1=12
+  \gdef\@jxiiname{#2}\gdef\@jxiitt{#3}\gdef\@jxiirole{#4}
+  \fi
+}
+
+%% empty default values
+\newcommand*{\@jiname}{} \newcommand*{\@jitt}{} \newcommand*{\@jirole}{}
+\newcommand*{\@jiiname}{} \newcommand*{\@jiitt}{} \newcommand*{\@jiirole}{}
+\newcommand*{\@jiiiname}{} \newcommand*{\@jiiitt}{} \newcommand*{\@jiiirole}{}
+\newcommand*{\@jivname}{} \newcommand*{\@jivtt}{} \newcommand*{\@jivrole}{}
+\newcommand*{\@jvname}{} \newcommand*{\@jvtt}{} \newcommand*{\@jvrole}{}
+\newcommand*{\@jviname}{} \newcommand*{\@jvitt}{} \newcommand*{\@jvirole}{}
+\newcommand*{\@jviiname}{} \newcommand*{\@jviitt}{} \newcommand*{\@jviirole}{}
+\newcommand*{\@jviiiname}{} \newcommand*{\@jviiitt}{} \newcommand*{\@jviiirole}{}
+\newcommand*{\@jixname}{} \newcommand*{\@jixtt}{} \newcommand*{\@jixrole}{}
+\newcommand*{\@jxname}{} \newcommand*{\@jxtt}{} \newcommand*{\@jxrole}{}
+\newcommand*{\@jxiname}{} \newcommand*{\@jxitt}{} \newcommand*{\@jxirole}{}
+\newcommand*{\@jxiiname}{} \newcommand*{\@jxiitt}{} \newcommand*{\@jxiirole}{}
+
+\newcommand*{\pslassetspath}[1]{\gdef\@pslassetspath{#1}}
+\newcommand*{\@pslassetspath}{.}
+
+\newcommand{\frabstract}[1]{\long\gdef\@frabstract{#1}}
+\newcommand*{\@frabstract}{}
+\newcommand{\thefrabstract}{\@frabstract}
+\newcommand{\enabstract}[1]{\long\gdef\@enabstract{#1}}
+\newcommand*{\@enabstract}[1]{}
+\newcommand{\theenabstract}{\@enabstract}
+\newcommand*{\frkeywords}[1]{\gdef\@frkeywords{#1}}
+\newcommand*{\@frkeywords}{\par}
+\newcommand{\thefrkeywords}{\@frkeywords}
+\newcommand{\enkeywords}[1]{\gdef\@enkeywords{#1}}
+\newcommand*{\@enkeywords}[1]{\par}
+\newcommand{\theenkeywords}{\@enkeywords}
+
+\ifLuaTeX{}
+\newfontfamily\pslfont{arial}
+\newenvironment{pslfontenv}{\pslfont}{\par}
+\else
+\fi
+\ifXeTeX{}
+\newfontfamily\pslfont{Arial}
+\newenvironment{pslfontenv}{\pslfont}{\par}
+\else
+\fi
+\ifPDFTeX{}
+\newenvironment{pslfontenv}{\fontfamily{phv}\selectfont}{\par}
+\else
+\fi
+
+\newif\if@nomaketitle\@nomaketitlefalse
+\DeclareOption{nomaketitle}{
+  \@nomaketitletrue
+}
+
+\newif\if@cotutelle\@cotutellefalse
+\DeclareOption{cotutelle}{
+  \@cotutelletrue
+}
+
+\ProcessOptions{}\relax{}
+
+\if@nomaketitle
+\else
+%% Override \maketitle to directly insert cover
+\renewcommand*{\maketitle}{
+  \pslcover{}
+}
+\fi
+
+\if@cotutelle
+\newcommand{\entitle}[1]{\gdef\@entitle{#1}}
+\newcommand{\otherinstitute}[1]{\gdef\@otherinstitute{#1}}
+\newcommand{\logootherinstitute}[1]{\gdef\@logootherinstitute{#1}}
+\fi
+
+%% Whole PSL cover, front + back
+\newcommand*{\pslcover}{
+  \AfterPreamble{\pslfrontcover{}}
+  \AtEndDocument{\pslbackcover{}}
+}
+
+%% Front PSL cover
+\newcommand*{\pslfrontcover}{
+  \begin{pslfontenv}
+    \thispagestyle{empty}
+    \begin{tikzpicture}[overlay, remember picture,
+      text centered, align=center]
+
+      %% background PSL logo
+      \node[on background layer]
+      at (current page.center) {\includegraphics{\@pslassetspath/figures/cover/front-bg.jpg}};
+
+      %% node origin
+      \coordinate (o) at (current page.center);
+
+      %% institute
+      \node[xshift=-86mm, yshift=75mm, anchor=north west] at (o) {
+        \begin{minipage}[h]{.7\paperwidth}
+          \color{pslblue}
+          \fontsize{14}{17}\selectfont
+          Pr\'{e}par\'{e}e \`{a} \@institute{}\unskip\strut\par
+          \if@cotutelle
+          Dans le cadre d'une cotutelle avec \@otherinstitute{}\unskip\strut\par
+          \fi
+        \end{minipage}
+      };
+
+      %% thesis title
+      \if@cotutelle
+      \node[yshift=33mm] at (o) {
+        \begin{minipage}[h]{.85\paperwidth}
+          \centering
+          \fontsize{18}{22}\selectfont
+          \textbf{\@title{}}\unskip\strut\par
+          \vspace{5mm}
+          \color{pslblue}
+          \@entitle{}\unskip\strut\par
+        \end{minipage}
+      };
+      \else
+      \node[yshift=31mm] at (o) {
+        \begin{minipage}[h]{.85\paperwidth}
+          \centering
+          \fontsize{18}{22}\selectfont
+          \textbf{\@title{}}\unskip\strut\par
+        \end{minipage}
+      };
+      \fi
+
+      %% author
+      \node[xshift=-85mm, yshift=-8mm, anchor=north west] at (o) {
+        \begin{minipage}[h]{.3\paperwidth}
+          \pslbluelabel{Soutenue par}\unskip\strut\par
+          \vspace{1mm}
+          {\fontsize{16}{19}\selectfont\textbf{\@author{}}}\unskip\strut\par
+          \vspace{1mm}
+          {\fontsize{12}{15}\selectfont Le \@date{}}\unskip\strut\par
+        \end{minipage}
+      };
+
+      %% doctoral school
+      \node[xshift=-85mm, yshift=-39mm, anchor=north west] at (o) {
+        \begin{minipage}[h]{.3\paperwidth}
+          \pslbluelabel{\'{E}cole doctorale n\textsuperscript{o}\@doctoralschoolnumber{}}
+          \unskip\strut\par
+          \vspace{1mm}
+          {\fontsize{14}{17}\selectfont\textbf{\@doctoralschoolname{}}}
+          \unskip\strut\par
+        \end{minipage}
+      };
+
+      %% doctoral specialty
+      \node[xshift=-85mm, yshift=-71mm, anchor=north west] at (o) {
+        \begin{minipage}[h]{.3\paperwidth}
+          \pslbluelabel{Sp\'{e}cialit\'{e}}
+          \unskip\strut\par
+          \vspace{1mm}
+          {\fontsize{14}{17}\selectfont\textbf{\@specialty{}}}
+        \end{minipage}
+      };
+
+      %% jury
+      \node[fill=lightgray!40, xshift=-8mm, yshift=-6.5mm, anchor=north west] at (o) {
+        \begin{minipage}[ht]{90mm}
+          \vspace{2mm}
+          {\hspace{1mm}\color{pslblue}\fontsize{12}{15}\selectfont Composition du jury :}
+
+          \vspace{5mm}
+          \hspace{-2mm}
+          \fontsize{9}{11}\selectfont
+          \begin{tabularx}{93mm}{p{56mm}X}
+            \psljurystyle{\@jiname}{\@jitt}{\@jirole}
+            \psljurystyle{\@jiiname}{\@jiitt}{\@jiirole}
+            \psljurystyle{\@jiiiname}{\@jiiitt}{\@jiiirole}
+            \psljurystyle{\@jivname}{\@jivtt}{\@jivrole}
+            \psljurystyle{\@jvname}{\@jvtt}{\@jvrole}
+            \psljurystyle{\@jviname}{\@jvitt}{\@jvirole}
+            \psljurystyle{\@jviiname}{\@jviitt}{\@jviirole}
+            \psljurystyle{\@jviiiname}{\@jviiitt}{\@jviiirole}
+            \psljurystyle{\@jixname}{\@jixtt}{\@jixrole}
+            \psljurystyle{\@jxname}{\@jxtt}{\@jxrole}
+            \psljurystyle{\@jxiname}{\@jxitt}{\@jxirole}
+            \psljurystyle{\@jxiiname}{\@jxiitt}{\@jxiirole}
+          \end{tabularx}
+          \vspace{-3mm}
+        \end{minipage}
+      };
+
+      %% PSL institute logo
+      \node[xshift=-56mm, yshift=-124mm] at (o) {
+        \includegraphics[scale=.4]{\@pslassetspath/figures/cover/logo-institute.jpg}
+      };
+
+      %% other institute logo (cotutelle)
+      \if@cotutelle
+      \node[xshift=65mm, yshift=125mm] at (o) {
+        \includegraphics[height=1.8cm]{\@logootherinstitute}
+      };
+      \fi
+
+    \end{tikzpicture}
+  \end{pslfontenv}
+  \clearpage
+  \mbox{}
+  \thispagestyle{empty}
+  \clearpage
+  \setcounter{page}{1}
+}
+
+%% Back PSL cover
+\newcommand*{\pslbackcover}{
+  \pagestyle{empty}
+  \cleardoublepage{}
+  \ifodd\value{page}\hbox{}\newpage\fi
+  \begin{pslfontenv}
+    \begin{tikzpicture}[overlay, remember picture,
+      text centered, align=center]
+
+      %% node origin
+      \coordinate (o) at (current page.center);
+
+      %% background images (PSL logo and blue semi-circle)
+      \node[on background layer, xshift=73mm, yshift=-94mm] at (current page.north west)
+      {\includegraphics[scale=.75]{\@pslassetspath/figures/cover/back-bg.png}};
+      \coordinate[xshift=-21mm] (circcenter) at (current page.south east);
+      \filldraw[pslblue] (circcenter) circle(21mm);
+      \coordinate[xshift=-56mm, yshift=.2mm] (gl0) at (current page.south east);
+      \draw[darkgray, line width=.5mm] (gl0) -| (current page.south east);
+
+      \fontsize{11}{13}\selectfont
+      %% french keywords
+      \node[yshift=0mm, above] (frKeywords) at (o) {
+        \pslbacknode{MOTS CL\'{E}S}{\@frkeywords{}}{10}{12}
+      };
+      %% french abstract
+      \node[yshift=2mm, above] at (frKeywords.north) {
+        \pslbacknode{R\'{E}SUM\'{E}}{\@frabstract{}}{9}{11}
+      };
+      %% english abstract
+      \node[yshift=-10mm, below] (enAbstract) at (o) {
+        \pslbacknode{ABSTRACT}{\@enabstract{}}{9}{11}
+      };
+      %% english keywords
+      \node[yshift=-2mm, below] at (enAbstract.south) {
+        \pslbacknode{KEYWORDS}{\@enkeywords{}}{10}{12}
+      };
+
+    \end{tikzpicture}
+  \end{pslfontenv}
+}
+
+%% Some text styling
+\newcommand{\pslbluelabel}[1]{{\color{pslblue}\fontsize{12}{15}\selectfont #1}}
+\newcommand{\psljurystyle}[3]{
+  \ifdefempty{#1}{}{
+    \fontsize{10}{12}\selectfont #1 &  \\
+    #2 & \emph{#3} \\[3.5pt]
+       &           \\
+  }
+}
+\newcommand{\pslbacknode}[4]{
+  \begin{minipage}[ht]{.8\paperwidth}
+    {\color{pslblue}\fontsize{12}{15}\selectfont #1}\unskip\strut\par
+    \vspace{-2.5mm}
+    \tikz{\draw[pslblue, line width=.5mm] (0, 0) -- (16.8, 0);}
+
+    \vspace{3mm}
+    {\color{black}\fontsize{#3}{#4}\selectfont #2}\unskip\strut\par
+  \end{minipage}
+}
+
+\endinput

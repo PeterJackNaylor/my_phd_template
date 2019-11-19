@@ -1,0 +1,254 @@
+\usepackage{lipsum}
+\usepackage{amsmath,amssymb,amsthm,amsfonts,dsfont,mathabx}             % AMS Math
+\usepackage{cancel}
+\usepackage{cite}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+%\usepackage[latin1]{inputenc}
+\usepackage[T1]{fontenc}            
+\usepackage{lmodern}   
+%\usepackage{ulem}
+%\usepackage[counterclockwise]{rotating}
+\usepackage[left=4.0cm,right=2.5cm,top=2.2cm,bottom=2.2cm,includefoot,includehead,headheight=13.6pt]{geometry}
+\renewcommand{\baselinestretch}{1.05}
+%\usepackage{datetime}
+% Table of contents for each chapter
+
+\usepackage[nottoc, notlof, notlot]{tocbibind}
+\usepackage[english]{minitoc}
+\setcounter{minitocdepth}{2}
+\mtcindent=15pt
+% Use \minitoc where to put a table of contents
+
+\usepackage{aecompl}
+
+% Glossary / list of abbreviations
+\usepackage{multicol}
+\usepackage[intoc]{nomencl}
+\renewcommand{\nomname}{Glossary of terms, Abbreviations, \\ Acronyms and Symbols}
+\makenomenclature
+\makenomenclature
+\setlength{\nomitemsep}{-\parsep}
+\setlength{\nomitemsep}{0.05pt}
+
+%----------------------------------------------
+
+
+
+
+% Links in pdf
+\usepackage{xcolor}
+\definecolor{linkcol}{rgb}{0,0,0.4} 
+\definecolor{citecol}{rgb}{0.5,0,0} 
+
+% definitions.
+% -------------------
+
+\setcounter{secnumdepth}{2}
+\setcounter{tocdepth}{2}
+
+% Some useful commands and shortcut for maths:  partial derivative and stuff
+
+\newcommand{\uddu}{\uparrow\downarrow\downarrow\uparrow}
+\newcommand{\pd}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\vect}[1]{\displaystyle\overrightarrow{#1}}
+\newcommand{\ket}[1]{\displaystyle\vert #1\rangle}
+\def\abs{\operatorname{abs}}
+% \def\argmax{\operatornamewithlimits{arg\,max}}
+% \def\argmin{\operatornamewithlimits{arg\,min}}
+\def\diag{\operatorname{Diag}}
+\newcommand{\eqRef}[1]{(\ref{#1})}
+
+
+\usepackage{rotating}                    % Sideways of figures & tables
+%\usepackage{bibunits}
+%\usepackage[sectionbib]{chapterbib}          % Cross-reference package (Natural BiB)
+%\usepackage{natbib}                  % Put References at the end of each chapter
+                                         % Do not put 'sectionbib' option here.
+                                         % Sectionbib option in 'natbib' will do.
+\usepackage{fancyhdr}                    % Fancy Header and Footer
+
+% \usepackage{txfonts}                     % Public Times New Roman text & math font
+  
+%%% Fancy Header %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Fancy Header Style Options
+
+\pagestyle{fancy}                       % Sets fancy header and footer
+\fancyfoot{}                            % Delete current footer settings
+
+%\renewcommand{\chaptermark}[1]{         % Lower Case Chapter marker style
+%  \markboth{\chaptername\ \thechapter.\ #1}}{}} %
+
+%\renewcommand{\sectionmark}[1]{         % Lower case Section marker style
+%  \markright{\thesection.\ #1}}         %
+
+\fancyhead[LE,RO]{\bfseries\thepage}    % Page number (boldface) in left on even
+% pages and right on odd pages
+\fancyhead[RE]{\bfseries\nouppercase{\leftmark}}      % Chapter in the right on even pages
+\fancyhead[LO]{\bfseries\nouppercase{\rightmark}}     % Section in the left on odd pages
+
+\let\headruleORIG\headrule
+\renewcommand{\headrule}{\color{black} \headruleORIG}
+\renewcommand{\headrulewidth}{1.0pt}
+\usepackage{colortbl}
+\arrayrulecolor{black}
+
+\fancypagestyle{plain}{
+  \fancyhead{}
+  \fancyfoot{}
+  \fancyhf{}
+  \renewcommand{\headrulewidth}{0pt}
+}
+
+
+
+
+% \usepackage{MyAlgorithm}
+% \usepackage[noend]{MyAlgorithmic}
+
+%%% Clear Header %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Clear Header Style on the Last Empty Odd pages
+\makeatletter
+
+\def\cleardoublepage{\clearpage\if@twoside \ifodd\c@page\else%
+  \hbox{}%
+  \thispagestyle{empty}%              % Empty header styles
+  \newpage%
+  \if@twocolumn\hbox{}\newpage\fi\fi\fi}
+
+\makeatother
+ 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+% Prints your review date and 'Draft Version' (From Josullvn, CS, CMU)
+\newcommand{\reviewtimetoday}[2]{\special{!userdict begin
+    /bop-hook{gsave 20 710 translate 45 rotate 0.8 setgray
+      /Times-Roman findfont 12 scalefont setfont 0 0   moveto (#1) show
+      0 -12 moveto (#2) show grestore}def end}}
+% You can turn on or off this option.
+\reviewtimetoday{\today}{Draft Version}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+\newenvironment{maxime}[1]
+{
+\vspace*{0cm}
+\hfill
+\begin{minipage}{0.5\textwidth}%
+%\rule[0.5ex]{\textwidth}{0.1mm}\\%
+\hrulefill $\:$ {\bf #1}\\
+%\vspace*{-0.25cm}
+\it 
+}%
+{%
+
+\hrulefill
+\vspace*{0.5cm}%
+\end{minipage}
+}
+
+\let\minitocORIG\minitoc
+\renewcommand{\minitoc}{\minitocORIG \vspace{1.5em}}
+
+\usepackage{multirow}
+\usepackage{diagbox}
+
+\newenvironment{bulletList}%
+{ \begin{list}%
+	{$\bullet$}%
+	{\setlength{\labelwidth}{25pt}%
+	 \setlength{\leftmargin}{30pt}%
+	 \setlength{\itemsep}{\parsep}}}%
+{ \end{list} }
+
+\newtheorem{definition}{Definition}
+\renewcommand{\epsilon}{\varepsilon}
+
+% centered page environment
+
+\newenvironment{vcenterpage}
+{\newpage\vspace*{\fill}\thispagestyle{empty}\renewcommand{\headrulewidth}{0pt}}
+{\vspace*{\fill}}
+
+% Change this to change the informations included in the pdf file
+
+\usepackage[palatino]{quotchap}
+\usepackage{tikz}
+\usepackage{adjustbox} % scaling pictures
+\usepackage{afterpage} % allows for the rotation
+
+
+% \usepackage{fontspec}
+
+\usepackage{setspace}
+
+% %%\usepackage[pdftex]{graphicx}
+\usepackage{subfig} %for subfloat images
+\usepackage{stmaryrd}
+
+\usepackage{algorithmic}
+\usepackage{algorithm}
+\usepackage[titletoc]{appendix}
+
+% \usepackage{floatpag} % so that with sideway figures i can remove the page number
+\newcommand{\acknowledgments}{
+  \chapter*{Acknowledgments}
+  \noindent
+
+      \input{frontmatter/thanks}
+
+  \vspace*{\fill} \newpage
+  \setcounter{page}{1}
+  \pagenumbering{arabic}
+}
+
+\usepackage[mathscr]{eucal}
+\usepackage{textcomp}
+
+
+\newenvironment{theabstract}[1]%
+{\markboth{#1}{#1}%
+{\large\noindent\rule{1ex}{1ex}\hspace{\stretch{1}}%
+{\textbf{\textit{#1}}}%
+\hspace{\stretch{1}}\rule{1ex}{1ex}}
+\addcontentsline{toc}{chapter}{#1} \adjustmtc
+\vskip 0.2in
+\begin{large}}%
+{\end{large}}
+
+
+
+\newcolumntype{R}[2]{%
+    >{\adjustbox{angle=#1,lap=\width-(#2)}\bgroup}%
+    l%
+    <{\egroup}%
+}
+\newcommand*\rot{\multicolumn{1}{R{70}{1em}}}% no optional argument here, please!
+
+
+
+\definecolor{linkcol}{rgb}{0,0,0.4} 
+\definecolor{citecol}{rgb}{0.5,0,0} 
+
+\usepackage{hyperref}
+\hypersetup
+{
+pdftitle="PhDNaylorPeter",
+pdfauthor="Peter NAYLOR", %auteur du document
+pdfsubject="Bioinformatic", %sujet du document
+%pdftoolbar=false, %barre d'outils non visible
+pdfmenubar=true, %barre de menu visible
+pdfhighlight=/O, %effect of clicking on a link
+colorlinks=true, %couleurs sur les liens hypertextes
+pdfpagemode=UseNone, %aucun mode de page
+pdfpagelayout=SinglePage, %ouverture en simple page
+pdffitwindow=true, %pages ouvertes entierement dans toute la fenetre
+%liens en couleur pour internet!!!
+%linkcolor=linkcol, %couleur des liens hypertextes internes
+%citecolor=citecol, %couleur des liens pour les citations
+%urlcolor=linkcol %couleur des liens pour les url
+%liens en noir pour impression!!!
+linkcolor=linkcol, %couleur des liens hypertextes internes
+citecolor=citecol, %couleur des liens pour les citations
+urlcolor=linkcol %couleur des liens pour les url
+}
+
+
